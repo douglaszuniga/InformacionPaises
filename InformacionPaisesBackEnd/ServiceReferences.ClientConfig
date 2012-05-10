@@ -1,0 +1,22 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="countrySoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="airportSoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://www.webservicex.net/country.asmx" binding="basicHttpBinding"
+                bindingConfiguration="countrySoap" contract="CountryWebReference.countrySoap"
+                name="countrySoap" />
+            <endpoint address="http://www.webservicex.net/airport.asmx" binding="basicHttpBinding"
+                bindingConfiguration="airportSoap" contract="AirportWebReference.airportSoap"
+                name="airportSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>

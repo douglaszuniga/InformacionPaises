@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{4f3c369c-a560-4929-af56-fedbe025828f}" Title="InformacionPaises" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="InformacionPaises author" Description="Sample description" Publisher="InformacionPaises">
+  <App xmlns="" ProductID="{4f3c369c-a560-4929-af56-fedbe025828f}" Title="Países" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="douglaszuniga" Description="Sample description" Publisher="InformacionPaises">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES"/>
@@ -27,7 +27,7 @@
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>InformacionPaises</Title>
+          <Title>Países</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>

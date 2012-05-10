@@ -7,15 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    xmlns:local="clr-namespace:InformacionPaisesBackEnd;assembly=InformacionPaisesBackEnd"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
     <phone:PhoneApplicationPage.Resources>
-
-
+        <local:CountryService x:Name="countryServ" />
+        <local:GroupToBrushValueConverter x:Key="groupBrush"/>
     </phone:PhoneApplicationPage.Resources>
 
             <!--LayoutRoot is the root grid where all page content is placed-->
@@ -32,26 +33,65 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox 
-                Height="622" 
-                Margin="6,6,6,0"
-                Name="Paises"
-                VerticalAlignment="Top"
-                SelectionChanged="PaisesSelectionChanged">
-                <!--<ItemsPanelTemplate>
-                    <Grid Margin="{StaticResource PhoneTouchTargetOverhang}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                            <TextBlock Text="Name" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-12,12,6"/>
-                            <TextBlock Text="" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
-                        </StackPanel>
-                    </Grid>
-                </ItemsPanelTemplate>-->
-            </ListBox>
+            <toolkit:LongListSelector 
+                x:Name="Paises" 
+                Background="Transparent"
+                SelectionChanged="PaisesSelectionChanged"
+                DataContext="{StaticResource countryServ}"
+                ItemsSource="{Binding Countries}">
+                
+                    <toolkit:LongListSelector.GroupItemsPanel>
+                        <ItemsPanelTemplate>
+                            <toolkit:WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </toolkit:LongListSelector.GroupItemsPanel>
+                    <toolkit:LongListSelector.GroupItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Converter={StaticResource groupBrush}}" Width="99" Height="99" Margin="6" IsHitTestVisible="{Binding HasItems}">
+                                <TextBlock Text="{Binding Key}" 
+                                           FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                           FontSize="36"
+                                           Margin="{StaticResource PhoneTouchTargetOverhang}"
+                                           Foreground="{StaticResource PhoneForegroundBrush}"                                        
+                                           VerticalAlignment="Bottom"/>
+                            </Border>
+                        </DataTemplate>
+                    </toolkit:LongListSelector.GroupItemTemplate>
+
+                    <toolkit:LongListSelector.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent">
+                                <Border Background="{StaticResource PhoneAccentBrush}" Width="75" Height="75" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Key}" 
+                                               Foreground="{StaticResource PhoneForegroundBrush}" 
+                                               Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                               VerticalAlignment="Bottom"/>
+                                </Border>
+                            </Border>
+                        </DataTemplate>
+                    </toolkit:LongListSelector.GroupHeaderTemplate>
+
+                <toolkit:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="{StaticResource PhoneTouchTargetOverhang}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                                <TextBlock 
+                                    Text="{Binding Name}" 
+                                    FontSize="36" 
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                                    Margin="12,-12,5,6" 
+                                    TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </toolkit:LongListSelector.ItemTemplate>
+            </toolkit:LongListSelector>
         </Grid>
+        
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
