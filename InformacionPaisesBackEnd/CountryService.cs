@@ -82,7 +82,7 @@ namespace InformacionPaisesBackEnd
                 var result = query.ToList();
                 _persistenceManager.DeleteCountries();
                 _persistenceManager.AddListOfCountry(result);
-                if (_countries == null || _countries.Count == 0)
+                if (_countries == null || !_countries[1].HasItems)
                 {
                     LoadCollectionWithGroups(result);
                 }

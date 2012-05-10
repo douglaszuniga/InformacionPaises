@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airport.cs" />
+    <Compile Include="AirportComparer.cs" />
     <Compile Include="AirportService.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryDataContext.cs" />

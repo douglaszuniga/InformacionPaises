@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using InformacionPaisesBackEnd;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -15,8 +16,19 @@ namespace InformacionPaises
 
         private void ApplicationBarIconButtonClick(object sender, EventArgs e)
         {
+            var selectedCountry = Paises.SelectedItem as Country;
+
             //Move to Information Panorama Page
-            NavigationService.Navigate(new Uri("/Information.xaml", UriKind.RelativeOrAbsolute));
+            string uri = "/Information.xaml?" ;
+            //params : Country Code
+            if (selectedCountry != null)
+            {
+                uri += "cId=" + selectedCountry.ID;
+                uri += "&cc=" + selectedCountry.Code;
+                uri += "&currency=" + selectedCountry.Currency;
+            }
+            
+            NavigationService.Navigate(new Uri(uri, UriKind.RelativeOrAbsolute));
         }
 
         private void PaisesSelectionChanged(object sender, SelectionChangedEventArgs e)

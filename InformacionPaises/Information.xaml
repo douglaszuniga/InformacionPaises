@@ -6,15 +6,17 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:InformacionPaisesBackEnd;assembly=InformacionPaisesBackEnd" mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
-
+    <phone:PhoneApplicationPage.Resources>
+        <local:AirportService x:Name="airportService" />
+    </phone:PhoneApplicationPage.Resources>
     
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
@@ -27,9 +29,11 @@
                         Height="491" 
                         HorizontalAlignment="Left" 
                         Margin="4,7,0,0" 
-                        Name="lbAirpot" 
+                        Name="Aeropuertos" 
                         VerticalAlignment="Top" 
-                        Width="411">
+                        Width="411"
+                        DataContext="{StaticResource airportService}"
+                        ItemsSource="{Binding List}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="{StaticResource PhoneTouchTargetOverhang}">
@@ -38,8 +42,8 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                                        <TextBlock Text="" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-12,12,6"/>
-                                        <TextBlock Text="" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-12,12,6"/>
+                                        <TextBlock Text="{Binding Code}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
@@ -49,30 +53,17 @@
             </controls:PanoramaItem>
 
             <!--Panorama item two-->
-            <controls:PanoramaItem Header="Monedas">
+            <controls:PanoramaItem Header="Moneda">
                 <Grid x:Name="currencyGrid">
-                    <ListBox 
-                        Height="491" 
-                        HorizontalAlignment="Left" 
-                        Margin="4,7,0,0" 
-                        Name="lbCurrency" 
+                    <TextBlock
+                        Height="126" 
+                        HorizontalAlignment="Center" 
+                        Margin="7,19,0,0" 
+                        Name="tbMoneda" 
+                        Text="TextBlock" 
+                        Style="{StaticResource PhoneTextTitle1Style}"
                         VerticalAlignment="Top" 
-                        Width="411">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="{StaticResource PhoneTouchTargetOverhang}">
-                                    <!--<Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>-->
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                                        <TextBlock Text="" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-12,12,6"/>
-                                        <!--<TextBlock Text="" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>-->
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                        Width="408" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Normal" />
                 </Grid>
             </controls:PanoramaItem>
         </controls:Panorama>
